@@ -1,0 +1,137 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h2>Chat</h2>
+<div class="container" id="container">
+    <div id="chatConnectionInfo">
+        <strong>Connecting.....</strong>
+    </div>
+    <div id="chatPannel">
+        <input type="hidden" id="displayname" />
+        <ul id="discussion">
+        </ul>
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Send" onclick="sendMessage()" />
+        <input type="button" id="changeroom" value="Change Room" onclick="leaveRoom()" />
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+<script src="~/lib/moment.js/moment.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .build();
+    let chatterName = prompt("Your name: ");
+    let chatPannel = document.getElementById("chatPannel");
+    let chatConnectionInfo = document.getElementById("chatConnectionInfo");
+    let container = document.getElementById("container");
+        let RoomIdContext;
+        connection.on("ReceiveMessage", receiveMessage);
+        connection.on("SendId", RoomID);
+    connection.on("ReceiveMessages", addMessages);
+
+    function addMessages(messages) {
+        if (!messages) return;
+
+        messages.forEach(function (m) {
+            receiveMessage(m.chatterName, m.content, m.sendAt);
+        });
+    }
+
+
+        function RoomID(roomId) {
+            addRoomId(roomId);
+            RoomIdContext = roomId;
+        }
+
+    function addRoomId(roomId) {
+        let newdiv = document.createElement("div");
+        newdiv.textContent = roomId;
+        container.insertBefore(newdiv, container.children[0]);
+    }
+
+    connection.onclose(function () {
+        onDisconnected();
+        setTimeout(onConnection(), 5000);
+    })
+
+
+    function onConnection() {
+        connection.start()
+            .then(onConnected)
+            .catch(function (err) {
+                console.error(err);
+            });
+    }
+
+    function onDisconnected() {
+        chatPannel.style = "filter :blur(2px)";;
+        chatConnectionInfo.style = "display:block;";
+        let button = document.getElementById("sendmessage");
+        button.disable = false;
+    }
+
+    function onConnected() {
+        chatPannel.style = "filter :blur(0);";
+        chatConnectionInfo.style = "display:none;";
+        let content = document.getElementById("message");
+        content.focus();
+
+        let button = document.getElementById("sendmessage");
+        button.disable = true;
+    }
+
+    onConnection();
+
+    function sendMessage() {
+        let content = document.getElementById("message");
+        let text = content.value;
+
+     
+        content.value = "";
+        content.focus();
+        connection.invoke("SendMessage", chatterName, text, RoomIdContext);
+    }
+
+    function receiveMessage(chattername, content, sendAt) {
+        let listitem = document.createElement("li");
+        let spanName = document.createElement("span");
+        spanName.textContent = chattername + "  ";
+        spanName.style = "padding-right: 15px";
+        listitem.appendChild(spanName);
+
+        let spanText = document.createElement("span");
+        spanText.style = "padding-right: 30px";
+        spanText.textContent = content + "  ";
+        listitem.appendChild(spanText);
+
+
+        let spanTime = document.createElement("span");
+        sendAt = moment(sendAt).format('LT');
+        spanTime.textContent = sendAt;
+        listitem.appendChild(spanTime);
+
+        let ul = document.getElementById("discussion");
+        ul.appendChild(listitem);
+
+    }
+
+    function leaveRoom() {
+        RoomIdContext = prompt("Room id: ");
+        if (RoomIdContext === null) {
+            return;
+        }
+        else {
+            let chatHistory = document.getElementById("discussion");
+            while (chatHistory.firstChild) {
+                chatHistory.removeChild(chatHistory.lastChild);
+            }
+            connection.invoke("LeaveRoom", RoomIdContext);
+        }
+    }
+
+</script>
