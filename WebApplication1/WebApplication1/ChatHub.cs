@@ -32,8 +32,8 @@ namespace WebApplication1
 
         public async Task SendMessage(string chatterName, string content, string connectionId)
         {
-            var roomId = await  _chatRoomService.GetRoom(connectionId);
-            var OldroomId = await _chatRoomService.GetRoom(Context.ConnectionId);
+            var roomId = await _chatRoomService.GetRoom(connectionId);
+            var OldroomId = await _chatRoomService.GetRoomByContextConnection(Context.ConnectionId);
 
             var message = new Message()
             {
@@ -42,19 +42,32 @@ namespace WebApplication1
                 sendAt = DateTime.UtcNow
             };
             await _chatRoomService.AddMessage(roomId, message);
-            await Groups.AddToGroupAsync(OldroomId.ToString(), roomId.ToString());
-            await Clients.Group(roomId.ToString()).SendAsync("ReceiveMessage", message.chatterName, message.content, message.sendAt);
+            //await Groups.AddToGroupAsync(OldroomId.ToString(), OldroomId.ToString());
+            if (roomId == OldroomId)
+            {
+                await Clients.Group(roomId.ToString()).SendAsync("ReceiveMessage", message.chatterName, message.content, message.sendAt);
+            }
+            else
+            {
+               // await Groups.AddToGroupAsync(roomId.ToString(), roomId.ToString());
+                await Clients.Group(OldroomId.ToString()).SendAsync("ReceiveMessage", message.chatterName, message.content, message.sendAt);
+                await Clients.Group(roomId.ToString()).SendAsync("ReceiveMessage", message.chatterName, message.content, message.sendAt);
+            }
+            
+            await Groups.AddToGroupAsync(roomId.ToString(), roomId.ToString());
+            
         }
 
         public async Task LeaveRoom(Guid roomId)
         {
 
             var chathistory = await _chatRoomService.GetMessages(roomId);
-           // await Groups.RemoveFromGroupAsync(Context.ConnectionId, OldroomId.ToString());
-            await Groups.AddToGroupAsync(roomId.ToString(), roomId.ToString());
-            
+            var roomId1 = await _chatRoomService.GetRoom(roomId.ToString());
+            var roomId2 = await _chatRoomService.GetRoomByContextConnection(Context.ConnectionId);
+            await Groups.AddToGroupAsync(roomId1.ToString(), roomId1.ToString());
 
-            await Clients.All.SendAsync("ReceiveMessages", chathistory);
+            await Clients.Group(roomId1.ToString()).SendAsync("ChangeId", roomId2);
+            await Clients.Caller.SendAsync("ReceiveMessages", chathistory);
         }
     }
 }

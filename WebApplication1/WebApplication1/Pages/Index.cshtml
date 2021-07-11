@@ -28,15 +28,20 @@
     let chatterName = prompt("Your name: ");
     let chatPannel = document.getElementById("chatPannel");
     let chatConnectionInfo = document.getElementById("chatConnectionInfo");
-    let container = document.getElementById("container");
-        let RoomIdContext;
-        connection.on("ReceiveMessage", receiveMessage);
-        connection.on("SendId", RoomID);
+    let container = document.getElementById("container")
+    let RoomIdContext;
+    connection.on("ReceiveMessage", receiveMessage);
+    connection.on("SendId", RoomID);
     connection.on("ReceiveMessages", addMessages);
+    connection.on("ChangeId", changeId);
+
 
     function addMessages(messages) {
         if (!messages) return;
-
+        let chatHistory = document.getElementById("discussion");
+        while (chatHistory.firstChild) {
+            chatHistory.removeChild(chatHistory.lastChild);
+        }
         messages.forEach(function (m) {
             receiveMessage(m.chatterName, m.content, m.sendAt);
         });
@@ -134,4 +139,7 @@
         }
     }
 
+    function changeId(newId) {
+        RoomIdContext = newId;
+    }
 </script>

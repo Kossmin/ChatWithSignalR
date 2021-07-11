@@ -10,7 +10,9 @@ namespace WebApplication1.GroupChatter
     {
         Task<Guid> CreateRoom(string connectionid);
         Task<Guid> GetRoom(string connectionid);
+        Task<Guid> GetRoomByContextConnection(string connectionid);
         Task AddMessage(Guid roomid, Message message);
         Task<IEnumerable<Message>> GetMessages(Guid roomId);
+
     }
 }

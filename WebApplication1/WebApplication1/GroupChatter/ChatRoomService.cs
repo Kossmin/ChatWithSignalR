@@ -65,5 +65,11 @@ namespace WebApplication1.GroupChatter
 
             return Task.FromResult(foundRoom.Key);
         }
+
+        public Task<Guid> GetRoomByContextConnection(string connectionid)
+        {
+            var foundRoom = _roomInfo.SingleOrDefault(p => p.Value.OwnerConnectionId == connectionid);
+            return Task.FromResult(foundRoom.Key);
+        }
     }
 }
