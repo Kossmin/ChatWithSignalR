@@ -5,17 +5,22 @@
 }
 
 <h2>Chat</h2>
-<div class="container" id="container">
+
+<div class="container-fluid" id="container">
     <div id="chatConnectionInfo">
         <strong>Connecting.....</strong>
     </div>
     <div id="chatPannel">
-        <input type="hidden" id="displayname" />
-        <ul id="discussion">
-        </ul>
-        <input type="text" id="message" />
-        <input type="button" id="sendmessage" value="Send" onclick="sendMessage()" />
-        <input type="button" id="changeroom" value="Change Room" onclick="leaveRoom()" />
+        <form class="for" id="form" onsubmit="sendMessage(); return false;">
+            <input type="hidden" id="displayname" />
+            <ul id="discussion">
+            </ul>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="message">
+            </div>
+            <button type="button" class="btn btn-light" id="sendmessage" onclick="sendMessage()">Send message</button>
+            <button type="button" class="btn btn-info" id="changeroom" onclick="leaveRoom()">Change room</button>
+        </form>
     </div>
 </div>
 
@@ -48,10 +53,10 @@
     }
 
 
-        function RoomID(roomId) {
-            addRoomId(roomId);
-            RoomIdContext = roomId;
-        }
+    function RoomID(roomId) {
+        addRoomId(roomId);
+        RoomIdContext = roomId;
+    }
 
     function addRoomId(roomId) {
         let newdiv = document.createElement("div");
@@ -95,7 +100,7 @@
     function sendMessage() {
         let content = document.getElementById("message");
         let text = content.value;
-
+        if (text.trim() === "") return;
      
         content.value = "";
         content.focus();
