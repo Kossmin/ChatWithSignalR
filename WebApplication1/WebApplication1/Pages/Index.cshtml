@@ -7,6 +7,9 @@
 <h2>Chat</h2>
 
 <div class="container-fluid" id="container">
+    <div id="div">
+
+    </div>
     <div id="chatConnectionInfo">
         <strong>Connecting.....</strong>
     </div>
@@ -15,11 +18,12 @@
             <input type="hidden" id="displayname" />
             <ul id="discussion">
             </ul>
-            <div class="mb-3">
+            <div class="col-3 mb-3">
                 <input type="text" class="form-control" id="message">
             </div>
             <button type="button" class="btn btn-light" id="sendmessage" onclick="sendMessage()">Send message</button>
             <button type="button" class="btn btn-info" id="changeroom" onclick="leaveRoom()">Change room</button>
+            <span>If you want to join your friend's room, please click on the "change room" button and input their room Id</span>
         </form>
     </div>
 </div>
@@ -59,9 +63,13 @@
     }
 
     function addRoomId(roomId) {
-        let newdiv = document.createElement("div");
-        newdiv.textContent = roomId;
-        container.insertBefore(newdiv, container.children[0]);
+        let newdiv = document.getElementById("div");
+        if (newdiv.childElementCount != 0) {
+            while (newdiv.firstChild) {
+                newdiv.removeChild(newdiv.lastChild);
+            }
+        }
+        newdiv.textContent ="Your room ID: " + roomId;
     }
 
     connection.onclose(function () {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j7tmdCxafK3kCeeNm8etSmJW4F/EPNCV8KlpjIBsR/3hFAA4i5eh4v+KCzUpDuY1GejwoEtJmFVhPP1LRfMLWw==",
+  "dgSpecHash": "Iw+NCI2E0GVSKDso1G5IDPt0JlBcwCDKjK+JIZ2G1sD9mj+mN2DvqB2FnIePJZVNzv2KhmdT552elZXmQsW/DQ==",
   "success": true,
-  "projectFilePath": "D:\\DemoWeb\\DemoJS\\ChatWithSignalR\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "D:\\DemoWeb\\DemoJS\\ChatWithSignalR\\WebApplication1\\WebApplication1\\ChatWithSignalR.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
