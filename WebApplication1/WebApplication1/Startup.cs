@@ -1,6 +1,8 @@
+using ChatWithSignalR.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +31,8 @@ namespace WebApplication1
             {
                 options.EnableDetailedErrors = true;
             });
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddSingleton<IChatRoomService, ChatRoomService>();
         }
 
@@ -50,7 +54,8 @@ namespace WebApplication1
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             

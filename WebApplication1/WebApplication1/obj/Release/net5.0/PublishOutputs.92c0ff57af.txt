@@ -1,4 +1,4 @@
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.exe
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.exe
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\wwwroot\css\site.css
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\wwwroot\favicon.ico
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\wwwroot\js\site.js
@@ -39,9 +39,9 @@ D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\ne
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\appsettings.Development.json
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\appsettings.json
 D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\libman.json
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.dll
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.deps.json
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.runtimeconfig.json
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.pdb
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.Views.dll
-D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\WebApplication1.Views.pdb
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.dll
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.deps.json
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.runtimeconfig.json
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.pdb
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.Views.dll
+D:\DemoWeb\DemoJS\ChatWithSignalR\WebApplication1\WebApplication1\obj\Release\net5.0\PubTmp\Out\ChatWithSignalR.Views.pdb

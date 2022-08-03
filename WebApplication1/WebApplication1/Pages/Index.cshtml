@@ -34,7 +34,7 @@
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/chathub")
         .build();
-    let chatterName = prompt("Your name: ");
+    /*let chatterName = prompt("Your name: ");*/
     let chatPannel = document.getElementById("chatPannel");
     let chatConnectionInfo = document.getElementById("chatConnectionInfo");
     let container = document.getElementById("container")
@@ -112,7 +112,7 @@
      
         content.value = "";
         content.focus();
-        connection.invoke("SendMessage", chatterName, text, RoomIdContext);
+        connection.invoke("SendMessage", localStorage.getItem("userEmail"), text, RoomIdContext);
     }
 
     function receiveMessage(chattername, content, sendAt) {
